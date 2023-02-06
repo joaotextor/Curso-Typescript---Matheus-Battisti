@@ -112,3 +112,115 @@ function showUserRole(role: boolean | string) {
 
 console.log(showUserRole(false))
 console.log(showUserRole("Admin"))
+
+
+//~ Type Alias - Declaração de um novo tipo personalizado
+
+type ID = string | number
+
+function showId(id: ID) {
+    console.log(`O ID é ${id}`)
+}
+
+//~ Interfaces
+//~ Outra maneira de nomear um tipo de objeto
+//~ Podemos determinar um nome para o tipo, suas propriedades e seus tipos
+
+interface Point {
+    x: number
+    y: number
+    z: number
+}
+
+function showCoords(obj: Point) {
+    console.log(`X: ${obj.x}, Y: ${obj.y}, Z: ${obj.z}`)
+}
+
+const coordObj:Point = {
+    x: 10,
+    y: 15,
+    z: 20
+}
+
+showCoords(coordObj)
+
+//~ Interface x Type Alias
+//~ Basicamente, na interface, novas propriedades podem ser adicionadas posteriormente.
+//~ O type alias, uma vez declarados, não permitem modificação posterior
+
+interface Person {
+    name: string
+}
+
+interface Person {
+    age: number
+}
+
+const somePerson: Person = {name: "Matheus", age: 30}
+console.log(`Interface | Nome: ${somePerson.name}, Idade: ${somePerson.age}`) // Vai imprimir o nome e a idade.
+
+type personType = {
+    name: string
+    age: number
+}
+
+// type personType = { // Esse tipo de alteração não funciona com type.
+//     age: number
+// }
+
+let person: personType = {name: "João", age: 32}
+
+console.log(`Alias | Nome: ${person.name}, Idade: ${person.age}`)
+
+//~ Literal Types
+//~ Permite colocar valores como tipos
+//~ Bastante utilizado em Union Types.
+
+let test: "testando"
+
+// test = 1 //! Type '1' is not assignable to type '"testando"'
+// test = "test" //! Type '"test"' is not assignable to type '"testando"'
+
+test = "testando"
+
+function showDirection(direction: "left" | "right" | "center") {
+    console.log(`A direção é: ${direction}`)
+}
+
+showDirection("center")
+// showDirection("top") //!Argument of type '"top"' is not assignable to parameter of type '"left" | "right" | "center"'
+
+
+//~ Non-null Assertion Operator
+//~ Às vezes o TS pode evidenciar um erro baseado em um valor que no momento atual do código ainda não está disponível, mas que será preenchido.
+//~ Utilizamos o caractere !
+
+const p = document.getElementById("some-p")
+
+// console.log(p.innerText) //!'p' is possibly 'null'.
+console.log(p!.innerText)
+
+
+//~ Bigint
+//~ Números muito altos
+//~ Notação literal, como 100n
+//~ Precisamos mudar a configuração do TS para a versão mínima ES2020
+
+let n: bigint
+
+// n = 1 //!Type 'number' is not assignable to type 'bigint'.
+n = 1000n //! Error on compile: BigInt literals are not available when targeting lower than ES2020.
+console.log(n)
+console.log(typeof n)
+
+//~ Symbol
+//~ cria uma referência única para um valor
+//~ Mesmo que ele possua um mesmo valor de outra variável, teremos valores sendo considerados diferentes.
+//~ Também precisas usar o ES2020
+
+let symbolA:symbol = Symbol("a")
+let symbolB = Symbol("a")
+
+console.log(symbolA == symbolB) //False
+console.log(symbolA === symbolB) //False
+
