@@ -1,0 +1,3 @@
+//~ Funções sem return
+
+ 
