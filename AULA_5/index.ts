@@ -153,4 +153,3 @@ const shirt = {name: "camisa", price: 49.99}
 
 console.log(showProductDetails(shirt))
 // console.log(showProductDetails({name: "teste", age: 30})) //! Argument of type '{ name: string; age: number; }' is not assignable to parameter of type '{ name: string; price: number; }'. Object literal may only specify known properties, and 'age' does not exist in type '{ name: string; price: number; }'.
-
